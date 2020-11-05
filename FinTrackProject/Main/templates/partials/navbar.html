@@ -1,0 +1,37 @@
+<div class="pos-f-t">
+ 
+  <nav class="navbar py-0" style="background-color: rgb(74, 17, 174);">
+    <a class="navbar-brand text-white"  href="{% url 'home' %}"> <h4><b> FinTrack\\//</b></h4></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="text-white">Menu</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        
+        
+        
+        {% if user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'profile' %}">{{request.user.username}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'logout' %}?next=/home">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'signup' %}">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</div>

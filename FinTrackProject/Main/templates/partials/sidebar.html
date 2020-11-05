@@ -1,0 +1,10 @@
+<div class="col-3 bg-dark text-center pt-3">
+    <h3>{{user.username}}</h3>
+    <img src="{{request.user.profile.image.url}}" style="width: 150px;" class="profile_pic">
+    <ul class="list-group text-left">
+        <li class="list-group-item bg-dark"><b>Username:</b> {{user.username}}</li>
+        <li class="list-group-item bg-dark"><b>Email:</b>  {{user.email}}</li>
+        <li class="list-group-item bg-dark"><b>Name:</b> {{user.first_name}} {{user.last_name}}</li>
+    </ul>
+
+</div>

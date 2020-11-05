@@ -1,0 +1,40 @@
+
+<div class="row">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-categories-tab" data-toggle="pill" href="#v-pills-categories" role="tab" aria-controls="v-pills-categories" aria-selected="true">Categories</a>
+        <a class="nav-link" id="v-pills-merchants-tab" data-toggle="pill" href="#v-pills-merchants" role="tab" aria-controls="v-pills-merchants" aria-selected="false">Merchants</a>
+        
+    </div>
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-categories" role="tabpanel" aria-labelledby="v-pills-categories-tab">
+            
+            <h3>My Spending Categories:</h3>
+            <hr>
+            {% for category in request.user.profile.spending_categories.all %}
+            <h3>{{category.name}} </h3> 
+            <h5>Budget: {{category.monthly_budget}}</h5>
+            <div class="row" style="height: 20vh;">
+                {% autoescape off %}
+                {{category.create_plot}}
+                {% endautoescape %}
+            </div> 
+            <hr>       
+            {% endfor %}
+            <a href="{% url 'add_spending_category' %}" class="btn-sm btn-outline" style=" border: 1px margin: 5px; width: fit-content;">Add Spending Category</a>
+            
+        </div>
+        <div class="tab-pane fade" id="v-pills-merchants" role="tabpanel" aria-labelledby="v-pills-merchants-tab">
+            
+            <h3>My Merchants:</h3>
+            <hr>
+            {% for merchant in request.user.profile.merchants.all %}
+            
+                <h3>{{merchant.name}}</h3>
+           
+            {% endfor %}
+            <a href="{% url 'add_merchant' %}" class="btn-sm btn-outline" style=" border: 1px margin: 5px; width: fit-content;">Add Merchant</a>
+        </div>
+        
+    </div>
+    
+</div>

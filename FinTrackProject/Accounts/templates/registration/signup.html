@@ -1,0 +1,15 @@
+{% extends 'partials/base.html' %}
+{% block title %}
+Signup
+{% endblock %}
+
+{% block content %}
+
+<h3>Create an account:</h3>
+<form method="POST" class="col-md-6">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+
+{% endblock %}

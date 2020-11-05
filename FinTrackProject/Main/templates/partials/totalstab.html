@@ -1,0 +1,102 @@
+
+<div class="row mb-2 text-center justify-content-between px-2 py-2 totalscards">
+    
+    <div class="card">
+        <div class="card-body py-auto px-2">
+            <h6 class="card-title">Month's Total Spending</h6>
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="dollars">{{request.user.profile.month_spending_usd}}</h6>
+                </div>
+                <div class="col-6">
+                    <h6 class="shekels">{{request.user.profile.month_spending_ils}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body py-auto px-2">
+            <h6 class="card-title">Total Account Balances</h6>
+            <div class="row">
+                <div class="col-6 ">
+                    
+                    <h6 class="dollars">{{request.user.profile.total_bank_dollars}}</h6>
+                </div>
+                <div class="col-6 ">
+                    
+                    <h6 class="shekels">{{request.user.profile.total_bank_shekels}}</h6>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="card">
+        <div class="card-body py-auto px-2">
+            <h6 class="card-title">Total Credit Due</h6>
+            <div class="row">
+                <div class="col-6 ">
+                    
+                    <h6 class="dollars"> {{request.user.profile.total_due_dollars}}</h6>
+                </div>
+                <div class="col-6 ">
+                    
+                    <h6 class="shekels">{{request.user.profile.total_due_shekels}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="card">
+        <div class="card-body py-auto px-2">
+            <h6 class="card-title">Current Credit Utilization:</h6>
+            <div class="row">
+                <div class="col-12 ">
+                    <b>{{request.user.profile.total_utilization}}%</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body py-auto px-2">
+            <h6 class="card-title">Total Credit Limit:</h6>
+                <div class="justify-content-between">
+                    
+                    <span class="dollars h6">{{request.user.profile.total_limit_dollars}}<span>
+
+                    
+                    <span class="shekels h6">{{request.user.profile.total_limit_shekels}}</span>
+                </div>
+        </div>
+    </div>
+</div>
+
+<h4>Total Month Budget Spent: </h4>
+<div class="row" style="height: 20vh;">
+    
+    {% autoescape off %}
+    {{request.user.profile.budget_spent_as_plot}}
+    {% endautoescape %}
+</div>
+<hr>
+<div class="row">
+    <div class="col-6">
+        <h5>Spending By Category:</h5>
+        {% autoescape off %}
+        {{user.profile.spend_cat_pie}}
+        {% endautoescape %}
+    </div>
+    <div class="col-6">
+        <h5>Spending By Merchant:</h5>
+        {% autoescape off %}
+        {{user.profile.spend_merchant_pie}}
+        {% endautoescape %}
+    </div>
+    
+</div>
+
+
+    
+    

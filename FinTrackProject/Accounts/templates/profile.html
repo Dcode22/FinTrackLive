@@ -1,0 +1,115 @@
+{% extends 'partials/base.html' %}
+{% load mathfilters %}
+{% load mytags %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+
+
+
+<h3>{{request.user.username}}</h3>
+<img src="{{request.user.profile.image.url}}" style="width: 150px;" class="profile_pic">
+
+<p style="margin-top: 10px;">
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        My Info
+    </a>
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+        Edit Info
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body" style="background-color: "">
+        <ul>
+            <li>Username: {{request.user.username}}</li>
+            <li>Email: {{request.user.email}}</li>
+            <li>First Name: {{request.user.first_name}} Last Name: {{request.user.last_name}}</li>
+            <li>{{request.user.profile}}</li>
+        </ul>
+    </div>
+    <p style="margin-bottom: 15px;"></p>
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px; " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Collapse
+    </a>
+</p>
+</div>
+<div class="collapse" id="collapse2">
+    <div class="card card-body" style="background-color: ">
+        <h2>Edit Profile</h2>
+        <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form1.as_p}}
+            {{form2.as_p}}
+            <button type="submit" class="btn-sm btn-outline" style="background-color; color: ; border: 1px  solid; margin-top: 10px">Update Profile</button>
+        </form>
+        
+    </div>
+    <p style="margin-bottom: 15px;">
+        <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+            Collapse
+        </a>
+    </p>
+</div>
+
+
+
+
+
+
+<p style="margin-top: 10px;">
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px;" data-toggle="collapse" href="#collapseIncCat" role="button" aria-expanded="false" aria-controls="collapseIncCat">
+        My Income Categories
+    </a>
+</p>
+
+<div class="collapse" id="collapseIncCat">
+    <div class="card card-body" style="background-color: ;">
+        My Income Categories:
+        {% for category in request.user.profile.income_categories.all %}
+        <div style="border: 1px  solid;">
+            <h3>{{category.name}}</h3>
+        </div>
+        {% endfor %}
+        <a href="{% url 'add_income_category' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Income Category</a>
+    </div>
+    <p style="margin-bottom: 15px;"></p>
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px; " data-toggle="collapse" href="#collapseIncCat" role="button" aria-expanded="false" aria-controls="collapseIncCat">
+        Collapse
+    </a>
+    
+</div>
+
+
+
+
+<p style="margin-top: 10px;">
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px;" data-toggle="collapse" href="#collapseIncSrc" role="button" aria-expanded="false" aria-controls="collapseIncSrc">
+        My Income Sources
+    </a>
+</p>
+
+<div class="collapse" id="collapseIncSrc">
+    <div class="card card-body" style="background-color: ;">
+        My Income Sources:
+        {% for source in request.user.profile.income_sources.all %}
+        <div style="border: 1px  solid;">
+            <h3>{{source.name}}</h3>
+        </div>
+        {% endfor %}
+        <a href="{% url 'add_income_source' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Income Source</a>
+    </div>
+    <p style="margin-bottom: 15px;"></p>
+    <a class="btn-sm btn-outline" style="color: ; border: 1px  solid; margin: 5px; " data-toggle="collapse" href="#collapseIncSrc" role="button" aria-expanded="false" aria-controls="collapseIncSrc">
+        Collapse
+    </a>
+    
+</div>
+
+
+
+
+
+
+{% endblock %}
+

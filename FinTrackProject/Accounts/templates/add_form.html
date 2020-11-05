@@ -1,0 +1,27 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}
+{% load bootstrap %}
+FinTrack - Add {{title}}
+{% endblock %}
+{% block content %}
+<div class="add-form">
+    <style>
+        .select2-container {
+            color: black;
+        }
+    </style>
+    <h2>Add {{title}}:</h2>
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <button type="submit" class="btn-sm btn-outline" style="background-color: black; color: white; border: 1px white solid; margin-top: 10px">Add</button>
+    </form>
+    
+    {% endblock %}
+    {% block js %}
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    {{form.media}}
+</div>
+{% endblock %}

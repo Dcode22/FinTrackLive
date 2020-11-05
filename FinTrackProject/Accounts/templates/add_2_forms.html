@@ -1,0 +1,14 @@
+{% extends 'partials/base.html' %}
+{% block title %}
+FinTrack - Add {{title}}
+{% endblock %}
+{% block content %}
+<h2>Add {{title}}:</h2>
+<form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form1.as_p}}
+    {{form2.as_p}}
+    <button type="submit" class="btn-sm btn-outline" style="background-color: black; color: white; border: 1px white solid; margin-top: 10px">Add</button>
+</form>
+
+{% endblock %}

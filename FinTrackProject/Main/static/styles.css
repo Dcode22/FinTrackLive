@@ -1,0 +1,41 @@
+body {
+    background-color: whitesmoke;
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.profile_pic {
+    width: 150px;
+    height: 150px;
+    color: rgb(157, 211, 49);
+}
+
+.dollars {
+    color: green;
+}
+
+.shekels {
+    color: blue;
+}
+
+.nav-link {
+    color: white;
+}
+
+#v-pills-tab {
+    background-color: rgb(70, 178, 178);
+    margin-left: 15px;
+    width: 20%;
+}
+
+.totalscards {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.tab-content {
+    padding: 15px;
+}
+.add-form {
+    border-top: 40px solid  rgb(57, 12, 134);
+    
+}

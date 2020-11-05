@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-Incoming-tab" data-toggle="pill" href="#v-pills-Incoming" role="tab" aria-controls="v-pills-Incoming" aria-selected="true">Incoming Payments</a>
+        <a class="nav-link" id="v-pills-outgoing-tab" data-toggle="pill" href="#v-pills-outgoing" role="tab" aria-controls="v-pills-outgoing" aria-selected="false">Outgoing Payments</a>
+        <a class="nav-link" id="v-pills-transfers-tab" data-toggle="pill" href="#v-pills-transfers" role="tab" aria-controls="v-pills-transfers" aria-selected="false">Transfers</a>
+        <a class="nav-link" id="v-pills-credit-bills-tab" data-toggle="pill" href="#v-pills-credit-bills" role="tab" aria-controls="v-pills-credit-bills" aria-selected="false">Credit Card Payments</a>
+    </div>
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-Incoming" role="tabpanel" aria-labelledby="v-pills-Incoming-tab">
+            <h3>My Incoming Payments:</h3>
+            <hr>
+            {% for inpayment in request.user.profile.incoming_payments.all %}
+            <div>
+                <h3>{{inpayment.description}}</h3>
+                <p>Date: {{inpayment.date_time}}</p>
+                <p>Amount (dollars): {{inpayment.amount_dollars}}</p>
+                <p>Amount (shekels): {{inpayment.amount_shekels}}</p>
+                <p>From: {{inpayment.income_source}}</p>
+                <p>Category: {{inpayment.income_category}}</p>
+                <p>Deposited in: {{inpayment.bank_account}}</p>
+                
+            </div>
+            {% endfor %}
+            <a href="{% url 'add_incoming_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Incoming Payment</a>
+            
+        </div>
+        <div class="tab-pane fade" id="v-pills-outgoing" role="tabpanel" aria-labelledby="v-pills-outgoing-tab">
+            <h3>My Outgoing Payments:</h3>
+            <hr>
+            {% for outpayment in request.user.profile.outgoing_payments.all %}
+            <div>
+                <h3>{{outpayment.description}}</h3>
+                <p>Date: {{outpayment.date_time}}</p>
+                <p>Amount (dollars): {{outpayment.amount_dollars}}</p>
+                <p>Amount (shekels): {{outpayment.amount_shekels}}</p>
+                <p>Paid To: {{outpayment.merchant}}</p>
+                
+                <p>Paid With: {% if outpayment.bank_account %} {{outpayment.bank_account}} {% else %}  {{outpayment.credit_card}} {% endif %}</p>
+                <p>Category: {{outpayment.spend_category}}</p>
+            </div>
+            {% endfor %}
+            <a href="{% url 'add_outgoing_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Outgoing Payment</a>
+            
+            
+        </div>
+        <div class="tab-pane fade" id="v-pills-transfers" role="tabpanel" aria-labelledby="v-pills-transfers-tab">
+            <h3>My Transfers:</h3>
+            <hr>
+            {% for acctransfer in request.user.profile.account_transfers.all %}
+            <div>
+                <h3>{{acctransfer.description}}</h3>
+                <p>Date: {{acctransfer.date_time}}</p>
+                <p>Amount (dollars): {{acctransfer.amount_dollars}}</p>
+                <p>Amount (shekels): {{acctransfer.amount_shekels}}</p>
+                <p>Extra fees - USD: {{acctransfer.extra_fee_dollars}}  ILS: {{acctransfer.extra_fee_shekels}}</p>
+                <p>Withdrawn from: {{acctransfer.bank_account_from}}</p>
+                <p>Deposited to: {{acctransfer.bank_account_to}}</p>
+                
+            </div>
+            {% endfor %}
+            <a href="{% url 'add_transfer' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Transfer</a>
+            
+        </div>
+        <div class="tab-pane fade" id="v-pills-credit-bills" role="tabpanel" aria-labelledby="v-pills-credit-bills-tab">
+            <h3>My Credit Card Payments:</h3>
+            <hr>
+            {% for payment in request.user.profile.credit_card_payments.all %}
+            <div>
+                <h3>{{payment.description}}</h3>
+                <p>Date: {{payment.date_time}}</p>
+                
+                <p>Amount (dollars): {{payment.amount_dollars}}</p>
+                <p>Amount (shekels): {{payment.amount_shekels}}</p>
+                <p>Extra fees - USD: {{payment.extra_fee_dollars}}  ILS: {{payment.extra_fee_shekels}}</p>
+                <p>Rewards discounts applied - USD: {{payment.rewards_discounts_dollars}} ILS: {{payment.rewards_discounts_shekels}}</p>
+                <p>Withdrawn from: {{payment.bank_account_from}}</p>
+                <p>Deposited to: {{payment.credit_card_to}}</p>
+                
+            </div>
+            {% endfor %}
+            <a href="{% url 'add_credit_card_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Credit Card Payment</a>
+            
+        </div>
+        
+        
+        
+    </div>
+    
+</div>

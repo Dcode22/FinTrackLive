@@ -1,0 +1,24 @@
+<div style=" padding: 20px; display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 1fr; grid-gap: 20px;">
+    
+        <div class="card">
+            
+                <a href="{% url 'add_incoming_payment' %}" class="btn btn-success stretched-link"><h3> Add Incoming Payment</h3></a>
+            
+        </div>
+        <div class="card">
+          
+                <a href="{% url 'add_outgoing_payment' %}" class="btn btn-danger stretched-link"><h3> Add Outgoing Payment</h3></a>
+            
+        </div>
+
+        <div class="card">
+            
+                <a href="{% url 'add_transfer' %}" class="btn btn-primary stretched-link"><h3> Add Incoming Payment</h3></a>
+           
+        </div>
+        <div class="card">
+            
+                <a href="{% url 'add_credit_card_payment' %}" class="btn btn-warning stretched-link"><h3> Add Credit Card Payment</h3></a>
+            
+        </div>
+</div>

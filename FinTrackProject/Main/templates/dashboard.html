@@ -1,0 +1,48 @@
+{% extends 'partials/base.html' %}
+{% block title %}
+Dashboard
+{% endblock %}
+{% block content %}
+
+<nav style="background-color: rgb(57, 12, 134);">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-total-charts-tab" data-toggle="tab" href="#nav-total-charts" role="tab" aria-controls="nav-total-charts" aria-selected="true">Totals</a>
+        <a class="nav-item nav-link" id="nav-banks-cards-tab" data-toggle="tab" href="#nav-banks-cards" role="tab" aria-controls="nav-banks-cards" aria-selected="false">Banks/Credit Cards</a>
+        <a class="nav-item nav-link" id="nav-spending-tab" data-toggle="tab" href="#nav-spending" role="tab" aria-controls="nav-spending" aria-selected="false">Spending</a>
+        <a class="nav-item nav-link" id="nav-payments-tab" data-toggle="tab" href="#nav-payments" role="tab" aria-controls="nav-payments" aria-selected="false">Payments</a>
+        <a class="nav-item nav-link" style="background-color: rgb(255, 116, 0); align-self: flex-end;" id="nav-new-tab" data-toggle="tab" href="#nav-new" role="tab" aria-controls="nav-new" aria-selected="false">Add New Transaction</a>
+
+    </div>
+    
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    
+    <div class="tab-pane fade show active" id="nav-total-charts" role="tabpanel" aria-labelledby="nav-total-charts-tab">
+        {% include 'partials/totalstab.html' %}
+        
+    </div>
+    
+    
+    
+    <div class="tab-pane fade" id="nav-banks-cards" role="tabpanel" aria-labelledby="nav-banks-cards-tab">
+        {% include 'partials/accounts_and_cards_tab.html' %}
+    </div>
+    
+    
+    
+    <div class="tab-pane  fade" id="nav-spending" role="tabpanel" aria-labelledby="nav-spending-tab">
+        {% include 'partials/spendingtab.html' %} 
+    </div>
+    
+    <div class="tab-pane fade" id="nav-payments" role="tabpanel" aria-labelledby="nav-payments-tab">
+        {% include 'partials/paymentstab.html' %} 
+    </div>
+    
+    <div class="tab-pane mt-3 fade" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
+        {% include 'partials/newtrantab.html' %} 
+    </div>
+    
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% load mathfilters %}
+{% load mytags %}
+
+
+<div class="row">
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <h4 class="text-white" style="margin-left: 15px;">Accounts:</h4>
+    {% for account in user.profile.bank_accounts.all %}
+    <a class="nav-link side-link1 {% if forloop.first %}active{% endif %}" id="v-pills-{{account.name}}-tab" data-toggle="pill" href="#v-pills-{{account.name}}" role="tab" aria-controls="v-pills-{{account.name}}" aria-selected="true">{{account.name}}</a>
+    {% endfor %}
+    <h4 class="text-white" style="margin-left: 15px;">Credit Cards:</h4>
+    {% for card in user.profile.credit_cards.all %}
+    <a class="nav-link side-link1" id="v-pills-{{card.name}}-card-tab" data-toggle="pill" href="#v-pills-{{card.name}}-card" role="tab" aria-controls="v-pills-{{card.name}}-card" aria-selected="true">{{card.name}}</a>
+    {% endfor %}
+</div>
+  <div class="tab-content" id="v-pills-tabContent">
+    {% for account in user.profile.bank_accounts.all %}
+    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="v-pills-{{account.name}}" role="tabpanel" aria-labelledby="v-pills-{{account.name}}-tab">
+        <div style="border: 1px white solid;">
+            <h3>{{account.name}}</h3>
+            <p>Currency: {{account.currency.name}}</p>
+            <p>Balance: {{account.balance}}</p>
+            {% if account.currency.name == 'USD' %}
+                {% convertMoney account.balance 'ILS' as balance_shekels %}
+                <p>Current value in shekels: {{balance_shekels}}</p>
+     
+            {% elif account.currency.name == 'ILS' %}
+                {% convertMoney account.balance 'USD' as balance_dollars %}
+                <p>Current value in dollars: {{balance_dollars}}</p>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endfor %}
+    {% for card in user.profile.credit_cards.all %}
+    <div class="tab-pane fade" id="v-pills-{{card.name}}-card" role="tabpanel" aria-labelledby="v-pills-{{card.name}}-card-tab">
+        
+        <h3>{{card.name}}</h3>
+            <p>Credit Limit: {{card.spending_limit}}</p>
+            <p>Monthly Due day: {{card.due_day}}</p>
+            <p>Balance Due: {{card.balance_due}}</p>
+            {% if card.spending_limit_currency == 'USD' %}
+                {% convertMoney card.balance_due 'ILS' as balance_due_shekels %}
+                <p>Balance Due in shekels (current rate): {{balance_due_shekels}}</p>
+     
+            {% elif card.spending_limit_currency == 'ILS' %}
+                {% convertMoney card.balance_due 'USD' as balance_due_dollars %}
+                <p>Balance Due in dollars (current rate): {{balance_due_dollars}}</p>
+            {% endif %}
+            <p>Current Revolving Utilization: {{card.credit_utilization}}%</p>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
