@@ -20,14 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kh!mn=3e(g94%4f$)47t4(ctq_*#=wuhtd0+4@d_@x4&a71fci'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# SECURITY WARNING: keep the secret key used in production secret
 
 # Application definition
 
@@ -84,16 +77,6 @@ WSGI_APPLICATION = 'FinTrack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fintrack',
-        'USER': 'postgres',
-        'PASSWORD': '922933',
-        'HOST': 'localhost'
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -139,7 +122,6 @@ MESSAGE_TAGS = {
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-OPEN_EXCHANGE_RATES_APP_ID = '3dce0b4e6fba47f5a2de000e38556619'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
@@ -150,3 +132,9 @@ STATICFILES_DIRS= [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'home'
+
+# Load local settings
+try:
+   from .local_settings import *
+except ImportError:
+    raise Exception('A local_settings.py file is required to run this project')
