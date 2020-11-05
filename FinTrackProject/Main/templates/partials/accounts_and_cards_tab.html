@@ -12,6 +12,8 @@
     {% for card in user.profile.credit_cards.all %}
     <a class="nav-link side-link1" id="v-pills-{{card.name}}-card-tab" data-toggle="pill" href="#v-pills-{{card.name}}-card" role="tab" aria-controls="v-pills-{{card.name}}-card" aria-selected="true">{{card.name}}</a>
     {% endfor %}
+    <a href="{% url 'add_bank_account' %}" class="btn-sm btn-outline text-white" style=" border: 1px white solid; margin: 5px; width: fit-content;">Add Bank Account</a>
+    <a href="{% url 'add_credit_card' %}" class="btn-sm btn-outline text-white" style=" border: 1px white solid; margin: 5px; width: fit-content;">Add Credit Card</a>
 </div>
   <div class="tab-content" id="v-pills-tabContent">
     {% for account in user.profile.bank_accounts.all %}

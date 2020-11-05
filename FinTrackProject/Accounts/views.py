@@ -25,7 +25,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             messages.success(request, "Profile successfully created")
-            return redirect('home')
+            return redirect('dashboard')
         else:
             return render(request, 'registration/signup.html', {'form': form})
     else:
@@ -110,7 +110,7 @@ def addBankAccount(request):
             new_inc_payment.bank_account = new_bank
             new_inc_payment.save()
             
-            return redirect('profile')
+            return redirect('dashboard')
 
     else:
         form1 = AddBankAccountForm()
@@ -146,7 +146,7 @@ def addCreditCard(request):
             new_out_payment.credit_card = new_card
             new_out_payment.save()    
             
-            return redirect('profile')
+            return redirect('dashboard')
 
     else:
         
@@ -162,7 +162,7 @@ def addIncomeCategory(request):
             new_income_category.profile = request.user.profile
             new_income_category.save()
             messages.success(request, "Income Category Added")
-            return redirect('profile')
+            return redirect('dashboard')
         
     else:
         
@@ -177,7 +177,7 @@ def addIncomeSource(request):
             new_income_source.profile = request.user.profile
             new_income_source.save()
             messages.success(request, "Income Source Added")
-            return redirect('profile')
+            return redirect('dashboard')
         
     else:
         
@@ -194,7 +194,7 @@ def addSpendingCategory(request):
             new_spending_category.profile = request.user.profile
             new_spending_category.save()
             messages.success(request, "Spending category added")
-            return redirect('profile')
+            return redirect('dashboard')
        
     else:
         return render(request, 'add_form.html', {'form': form, 'title': 'Spending Category'})
@@ -211,7 +211,7 @@ def addMerchant(request):
             new_merchant.profile = request.user.profile
             new_merchant.save()
             messages.success(request, "Merchant Added")
-            return redirect('profile')
+            return redirect('dashboard')
        
     else:
         return render(request, 'add_form.html', {'form': form, 'title': 'Merchant'})
@@ -227,7 +227,7 @@ def addIncomingPayment(request):
             new_inc_pmnt.profile = request.user.profile
             new_inc_pmnt.save()
             messages.success(request, "Incoming Payment Added")
-            return redirect('profile')
+            return redirect('dashboard')
        
     else:
         return render(request, 'add_form.html', {'form': form, 'title': 'Incoming Payment'})
@@ -246,7 +246,7 @@ def addOutgoingPayment(request):
             new_out_pmnt.profile = request.user.profile
             new_out_pmnt.save()
             messages.success(request, "Outgoing Payment Added")
-            return redirect('profile')
+            return redirect('dashboard')
        
     else:
         return render(request, 'add_form.html', {'form': form, 'title': 'Outgoing Payment'})
