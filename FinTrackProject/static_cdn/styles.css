@@ -1,7 +1,8 @@
 body {
     background-color: whitesmoke;
     color: black;
-
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .profile_pic {
     width: 150px;
@@ -22,7 +23,7 @@ body {
 }
 
 #v-pills-tab {
-    background-color: rgb(255, 116, 0);
+    background-color: rgb(70, 178, 178);
     margin-left: 15px;
     width: 20%;
 }
@@ -31,26 +32,10 @@ body {
     margin-left: 0px;
     margin-right: 0px;
 }
-
-#v-pills-tabContent {
+.tab-content {
     padding: 15px;
 }
-
 .add-form {
     border-top: 40px solid  rgb(57, 12, 134);
-
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-    background-color: white;
-}
-
-.side-link1 {
-    border-bottom: 1px white solid;
-}
-
-.nav-pills {
-    min-height: 100vh;
+    
 }
