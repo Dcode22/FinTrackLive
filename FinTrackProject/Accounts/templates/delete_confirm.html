@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}
 {% load bootstrap %}
-FinTrack - Add {{title}}
+FinTrack - Delete {{object}}
 {% endblock %}
 {% block content %}
 <div class="add-form">
@@ -11,14 +11,13 @@ FinTrack - Add {{title}}
             color: black;
         }
     </style>
-    <h2>Add {{title}}:</h2>
-    <form action="." method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.media }}
-        {{form.as_p}}
-        
-        <button type="submit" class="btn-sm btn-outline" style="background-color: black; color: white; border: 1px white solid; margin-top: 10px">Add</button>
-    </form>
+    <h2>Delete {{Object}}:</h2>
+
+    
+    <form method="post">{% csrf_token %} 
+        <p>Are you sure you want to delete "{{ object }}"?</p> 
+        <input type="submit" value="Confirm"> 
+    </form> 
     
     {% endblock %}
     {% block js %}

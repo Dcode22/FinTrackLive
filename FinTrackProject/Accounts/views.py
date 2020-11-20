@@ -10,6 +10,8 @@ from djmoney.money import Money
 from djmoney.contrib.exchange.models import convert_money
 import plotly.graph_objects as go
 from plotly.offline import plot
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls import reverse
 
 # Create your views here.
 
@@ -119,10 +121,12 @@ def addBankAccount(request):
 
 
 
-def EditBank(request):
-    form = AddBankAccountForm(data=request.POST, instance=request.user)
-    if request.method =='POST':
-        form = AddBankAccountForm()
+class EditBank(UpdateView):
+    model = BankAccount
+    fields = ['name']
+    template_name = 'bankaccount_update_form.html'
+    def get_success_url(self):
+        return reverse('dashboard')
 
 
 
@@ -152,6 +156,12 @@ def addCreditCard(request):
         
         return render(request, 'add_2_forms.html', {'form1': form1, 'form2': form2, 'title':'Credit Card'})
 
+class EditCreditCard(UpdateView):
+    model = CreditCard
+    fields = ['name', 'spending_limit','due_day']
+    template_name = 'add_form.html'
+    def get_success_url(self):
+        return reverse('dashboard')
 
 def addIncomeCategory(request):
     form = AddIncomeCategoryForm()
@@ -344,3 +354,6 @@ def dashboard(request):
 
     return render(request, 'dashboard.html')
     
+def DeleteBank(request, bank_id):
+    BankAccount.objects.filter(id=bank_id).delete()
+    return reverse('dashboard')

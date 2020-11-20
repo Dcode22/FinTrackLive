@@ -8,3 +8,7 @@ register = template.Library()
 @register.simple_tag 
 def convertMoney(moneyobject, currency): 
     return convert_money(moneyobject, currency)
+
+@register.filter
+def verbose_name(obj):
+    return obj._meta.verbose_name

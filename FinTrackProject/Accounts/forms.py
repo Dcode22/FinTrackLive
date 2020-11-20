@@ -4,6 +4,8 @@ from Main.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from dal import autocomplete
+# from datetimewidget.widgets import DateTimeWidget
+
 
 
 class SignUpForm(UserCreationForm):
@@ -70,10 +72,11 @@ class AddMerchantForm(forms.ModelForm):
 class AddOutgoingPaymentForm(forms.ModelForm):
     class Meta: 
         model = OutgoingPayment
-        fields = ('description', 'amount', 'spend_category', 'merchant', 'bank_account', 'credit_card')
+        fields = ('date_time', 'description', 'amount', 'spend_category', 'merchant', 'bank_account', 'credit_card')
         widgets = {
             # 'spend_category': autocomplete.ModelSelect2(url='spend_cat_autocomplete'),
-            'merchant': autocomplete.ModelSelect2(url='merchant_autocomplete')
+            'merchant': autocomplete.ModelSelect2(url='merchant_autocomplete'),
+            # 'date_time': DateTimeWidget()
         }
 
 

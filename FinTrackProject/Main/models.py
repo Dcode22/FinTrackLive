@@ -26,7 +26,7 @@ class BankAccount(models.Model):
     # balance = MoneyField(max_digits=10, decimal_places=2, null=True, default_currency='USD')
     def __str__(self):
         return f"{self.name}"
-
+        
     @property
     def balance(self):
         if self.currency.name == 'USD':
@@ -61,7 +61,22 @@ class BankAccount(models.Model):
                     
         return balance
         
-
+    def transactions_thirty(self):
+        now = datetime.now().date
+        minus_thirty = datetime.now() + relativedelta(days=-30)
+        trans = []
+        for transaction in self.outgoing_payments.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        for transaction in self.incoming_payments.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        for transaction in self.credit_card_payments.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        for transaction in self.outgoing_transfers.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        for transaction in self.incoming_transfers.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        
+        return trans
 
 class CreditCard(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='credit_cards')
@@ -118,7 +133,15 @@ class CreditCard(models.Model):
 
         return round(percentage, 2)
             
-    
+    def transactions_thirty(self):
+        now = datetime.now().date
+        minus_thirty = datetime.now() + relativedelta(days=-30)
+        trans = []
+        for transaction in self.outgoing_payments.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)
+        for transaction in self.credit_card_payments.filter(date_time__gt=minus_thirty):
+            trans.append(transaction)  
+        return trans
 
 class IncomeCategory(models.Model):
     name = models.CharField(max_length=50)
@@ -230,7 +253,6 @@ class OutgoingPayment(Payment):
         self.amount_dollars = convert_money(self.amount, 'USD')
         self.amount_shekels = convert_money(self.amount, 'ILS')
         super(OutgoingPayment,self).save(*args, **kwargs)
-
 
 class Transfer(models.Model):
     date_time = models.DateTimeField(auto_now_add=False, default=datetime.now())

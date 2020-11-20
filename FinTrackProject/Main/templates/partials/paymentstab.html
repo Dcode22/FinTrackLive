@@ -1,83 +1,142 @@
+{% load mathfilters %}
 <div class="row">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-Incoming-tab" data-toggle="pill" href="#v-pills-Incoming" role="tab" aria-controls="v-pills-Incoming" aria-selected="true">Incoming Payments</a>
-        <a class="nav-link" id="v-pills-outgoing-tab" data-toggle="pill" href="#v-pills-outgoing" role="tab" aria-controls="v-pills-outgoing" aria-selected="false">Outgoing Payments</a>
-        <a class="nav-link" id="v-pills-transfers-tab" data-toggle="pill" href="#v-pills-transfers" role="tab" aria-controls="v-pills-transfers" aria-selected="false">Transfers</a>
-        <a class="nav-link" id="v-pills-credit-bills-tab" data-toggle="pill" href="#v-pills-credit-bills" role="tab" aria-controls="v-pills-credit-bills" aria-selected="false">Credit Card Payments</a>
+        <a class="nav-link active side-link1" id="v-pills-Incoming-tab" data-toggle="pill" href="#v-pills-Incoming" role="tab" aria-controls="v-pills-Incoming" aria-selected="true">Incoming Payments</a>
+        <a class="nav-link side-link1" id="v-pills-outgoing-tab" data-toggle="pill" href="#v-pills-outgoing" role="tab" aria-controls="v-pills-outgoing" aria-selected="false">Outgoing Payments</a>
+        <a class="nav-link side-link1" id="v-pills-transfers-tab" data-toggle="pill" href="#v-pills-transfers" role="tab" aria-controls="v-pills-transfers" aria-selected="false">Transfers</a>
+        <a class="nav-link side-link1" id="v-pills-credit-bills-tab" data-toggle="pill" href="#v-pills-credit-bills" role="tab" aria-controls="v-pills-credit-bills" aria-selected="false">Credit Card Payments</a>
     </div>
     <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-Incoming" role="tabpanel" aria-labelledby="v-pills-Incoming-tab">
             <h3>My Incoming Payments:</h3>
             <hr>
+            <small style="font-size: 0.7rem;">
+            <table>
+                <tr>
+                <th>Date:</th>
+                <th>Description:</th>
+                <th colspan="2">Amount:</th>
+                <th>Source:</th>
+                <th>Category:</th>
+                <th>Deposited in:</th>
+            </tr>
             {% for inpayment in request.user.profile.incoming_payments.all %}
-            <div>
-                <h3>{{inpayment.description}}</h3>
-                <p>Date: {{inpayment.date_time}}</p>
-                <p>Amount (dollars): {{inpayment.amount_dollars}}</p>
-                <p>Amount (shekels): {{inpayment.amount_shekels}}</p>
-                <p>From: {{inpayment.income_source}}</p>
-                <p>Category: {{inpayment.income_category}}</p>
-                <p>Deposited in: {{inpayment.bank_account}}</p>
-                
-            </div>
+            <tr>
+                <td>{{inpayment.date_time}}</td>
+                <td>{{inpayment.description}}</td>
+                <td class="dollars">{{inpayment.amount_dollars}}</td>
+                <td class="shekels">{{inpayment.amount_shekels}}</td>
+                <td>{{inpayment.income_source}}</td>
+                <td>{{inpayment.income_category}}</td>
+                <td>{{inpayment.bank_account}}</td>
+            </tr>
             {% endfor %}
+            
+            </table>
+            </small>
             <a href="{% url 'add_incoming_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Incoming Payment</a>
             
         </div>
         <div class="tab-pane fade" id="v-pills-outgoing" role="tabpanel" aria-labelledby="v-pills-outgoing-tab">
             <h3>My Outgoing Payments:</h3>
             <hr>
-            {% for outpayment in request.user.profile.outgoing_payments.all %}
-            <div>
-                <h3>{{outpayment.description}}</h3>
-                <p>Date: {{outpayment.date_time}}</p>
-                <p>Amount (dollars): {{outpayment.amount_dollars}}</p>
-                <p>Amount (shekels): {{outpayment.amount_shekels}}</p>
-                <p>Paid To: {{outpayment.merchant}}</p>
+            <small style="font-size: 0.8rem;">
+            <table>
+                <tr>
+                <th>Date:</th>
+                <th>Description:</th>
+                <th colspan="2">Amount:</th>
+                <th>To:</th>
+                <th>Category</th>
+                <th>Paid With:</th>
                 
-                <p>Paid With: {% if outpayment.bank_account %} {{outpayment.bank_account}} {% else %}  {{outpayment.credit_card}} {% endif %}</p>
-                <p>Category: {{outpayment.spend_category}}</p>
-            </div>
+            </tr>
+            {% for outpayment in request.user.profile.outgoing_payments.all %}
+            <tr>
+                <td>{{outpayment.date_time}}</td>
+                <td>{{outpayment.description}}</td>
+                <td class="dollars">{{outpayment.amount_dollars}}</td>
+                <td class="shekels">{{outpayment.amount_shekels}}</td>
+                <td>{{outpayment.merchant}}</td>
+                <td>{{outpayment.spend_category}}</td>
+                <td>{% if outpayment.bank_account %} {{outpayment.bank_account}} {% else %}  {{outpayment.credit_card}} {% endif %}</td>
+            </tr>
             {% endfor %}
+            
+            </table>
+            </small>
             <a href="{% url 'add_outgoing_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Outgoing Payment</a>
             
             
         </div>
         <div class="tab-pane fade" id="v-pills-transfers" role="tabpanel" aria-labelledby="v-pills-transfers-tab">
+            
             <h3>My Transfers:</h3>
             <hr>
-            {% for acctransfer in request.user.profile.account_transfers.all %}
-            <div>
-                <h3>{{acctransfer.description}}</h3>
-                <p>Date: {{acctransfer.date_time}}</p>
-                <p>Amount (dollars): {{acctransfer.amount_dollars}}</p>
-                <p>Amount (shekels): {{acctransfer.amount_shekels}}</p>
-                <p>Extra fees - USD: {{acctransfer.extra_fee_dollars}}  ILS: {{acctransfer.extra_fee_shekels}}</p>
-                <p>Withdrawn from: {{acctransfer.bank_account_from}}</p>
-                <p>Deposited to: {{acctransfer.bank_account_to}}</p>
+            <small style="font-size: 0.8rem;">
+            <table>
+                <tr>
+                <th>Date:</th>
+                <th>Description:</th>
+                <th colspan="2">Amount:</th>
+                <th colspan="2">Fees:</th>
+                <th>From:</th>
+                <th>To:</th>
                 
-            </div>
+            </tr>
+            {% for acctransfer in request.user.profile.account_transfers.all %}
+            <tr>
+                <td>{{acctransfer.date_time}}</td>
+                <td>{{acctransfer.description}}</td>
+                <td class="dollars">{{acctransfer.amount_dollars}}</td>
+                <td class="shekels">{{acctransfer.amount_shekels}}</td>
+                <td class="dollars">{{acctransfer.extra_fee_dollars}}</td>
+                <td class="shekels">{{acctransfer.extra_fee_shekels}}</td>
+                <td>{{acctransfer.bank_account_from}}</td>
+                <td>{{acctransfer.bank_account_to}}</td>
+            </tr>
             {% endfor %}
+            
+            </table>
+            </small>
             <a href="{% url 'add_transfer' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Transfer</a>
             
         </div>
         <div class="tab-pane fade" id="v-pills-credit-bills" role="tabpanel" aria-labelledby="v-pills-credit-bills-tab">
+            
             <h3>My Credit Card Payments:</h3>
             <hr>
+            <small style="font-size: 0.7rem;">
+            <table>
+                <tr>
+                <th>Date:</th>
+                <th>Description:</th>
+                <th colspan="2">Amount paid off:</th>
+                <th colspan="2">Transaction Fees:</th>
+                <th colspan="2">Rewards Applied:</th>
+                <th>Paid From:</th>
+                <th>Card Paid:</th>
+                
+            </tr>
             {% for payment in request.user.profile.credit_card_payments.all %}
-            <div>
-                <h3>{{payment.description}}</h3>
-                <p>Date: {{payment.date_time}}</p>
-                
-                <p>Amount (dollars): {{payment.amount_dollars}}</p>
-                <p>Amount (shekels): {{payment.amount_shekels}}</p>
-                <p>Extra fees - USD: {{payment.extra_fee_dollars}}  ILS: {{payment.extra_fee_shekels}}</p>
-                <p>Rewards discounts applied - USD: {{payment.rewards_discounts_dollars}} ILS: {{payment.rewards_discounts_shekels}}</p>
-                <p>Withdrawn from: {{payment.bank_account_from}}</p>
-                <p>Deposited to: {{payment.credit_card_to}}</p>
-                
-            </div>
+            <tr>
+                <td>{{payment.date_time}}</td>
+                <td>{{payment.description}}</td>
+                <td class="dollars">{{payment.amount_dollars| addition:payment.rewards_discounts_dollars}}</td>
+                <td class="shekels">{{payment.amount_shekels| addition:payment.rewards_discounts_shekels}}</td>
+                <td class="dollars">{{payment.extra_fee_dollars}}</td>
+                <td class="shekels">{{payment.extra_fee_shekels}}</td>
+                <td class="dollars">{{payment.rewards_discounts_dollars}}</td>
+                <td class="shekels">{{payment.rewards_discounts_shekels}}</td>
+                <td>{{payment.bank_account_from}}</td>
+                <td>{{payment.credit_card_to}}</td>
+            </tr>
             {% endfor %}
+            
+            </table>
+            </small>
+            
+            
             <a href="{% url 'add_credit_card_payment' %}" class="btn-sm btn-outline" style="color: ; border: 1px solid ; margin: 5px; width: fit-content;">Add Credit Card Payment</a>
             
         </div>

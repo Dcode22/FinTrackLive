@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}
 {% load bootstrap %}
-FinTrack - Add {{title}}
+FinTrack -  Edit bank
 {% endblock %}
 {% block content %}
 <div class="add-form">
@@ -11,10 +11,9 @@ FinTrack - Add {{title}}
             color: black;
         }
     </style>
-    <h2>Add {{title}}:</h2>
+    <h2>edit bank:</h2>
     <form action="." method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.media }}
         {{form.as_p}}
         
         <button type="submit" class="btn-sm btn-outline" style="background-color: black; color: white; border: 1px white solid; margin-top: 10px">Add</button>
