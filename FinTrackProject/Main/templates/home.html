@@ -6,6 +6,10 @@ FinTrack - Home
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to FinTrack!</h1>
-<h3 style="font-style: italic;">Track all of your finances with us!</h3>
+<div class="homepage"></div>
+<div class="home-content">
+    <h1 style="font-size: 4rem; color: rgb(74, 17, 174);"> <b>Welcome to FinTrack\\//</b> </h1>
+    <h3 style="font-style: italic;">Track all of your finances with us!</h3>
+    <a href="{% url 'signup' %}"><button class="btn btn-primary">Signup</button ></a> <a href="{% url 'login' %}"><button class="btn btn-primary">Log In</button></a>
+</div>
 {% endblock %}

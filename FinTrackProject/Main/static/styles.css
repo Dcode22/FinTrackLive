@@ -37,7 +37,7 @@ body {
 }
 
 .add-form {
-    border-top: 40px solid  rgb(57, 12, 134);
+    border-top: 40px solid  rgb(74, 17, 174);
 
 }
 table, th, td {
@@ -53,4 +53,30 @@ table, th, td {
 
 .nav-pills {
     min-height: 100vh;
+}
+
+.homepage {
+    
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+    background-image: url("homepage.jpg");
+    filter: blur(3px);
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+.home-content {
+    height: 90vh;
+    width: 100%;
+    padding-top: 30vh;
+    text-align: center;
+    text-shadow: whitesmokes;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.btn-primary {
+    background-color:rgb(74, 17, 174);
+    margin: 10px;
+    border: none;
 }

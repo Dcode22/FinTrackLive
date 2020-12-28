@@ -18,7 +18,7 @@
           <a class="nav-link text-white" href="{% url 'profile' %}">{{request.user.username}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'logout' %}?next=/home">Logout</a>
+          <a class="nav-link text-white" href="{% url 'logout' %}?next=/">Logout</a>
         </li>
         {% else %}
         <li class="nav-item active">
